@@ -5,10 +5,11 @@ const dotenv = require('dotenv');
 dotenv.config();
 const PORT = process.env.PORT;
 
-const { Book } = require('./models/index');
+const { Book, User } = require('./models/index');
 
 const store = {
     books : [],
+    users: []
 };
 
 [1, 2, 3].map(item => {
@@ -21,12 +22,39 @@ const store = {
         fileName = `fileName ${item}`
         );
     store.books = [...store.books, newBook];
+
+    const newUser = new User(
+            name = `name ${item}`,
+            surname = `surname ${item}`,
+            password = `password ${item}`,
+            email = `email ${item}` 
+        );
+    store.users = [...store.users, newUser];
 });
 
 const app = express();
 
 app.use(formData.parse());
 
+app.post('/api/user/login/', (req, res) => {
+    const { email, password } = req.body;
+    const { users } = store;
+    const index = users.findIndex(item => item.email === email && item.password === password);
+    
+    if (index !== -1) {
+        res.status(200)
+            .json({
+                success: true,
+                message: 'the user is loged in'
+            })
+    } else {
+        res.status(404)
+            .json({
+                success: false,
+                message: 'user not found'
+            })
+    }
+})
 app.get('/api/book/', (req, res) => {
     const { books } = store;
     res.status(200)
