@@ -29,7 +29,11 @@ app.use(formData.parse());
 
 app.get('/api/book/', (req, res) => {
     const { books } = store;
-    res.json(books);
+    res.status(200)
+        .json({
+            success: true,
+            books
+        });
 });
 app.get('/api/book/:id', (req, res) => {
     const { books } = store;
@@ -37,10 +41,17 @@ app.get('/api/book/:id', (req, res) => {
     const index = books.findIndex(item => item.id === id);
 
     if(index !== -1) {
-        res.json(books[index]);
+        res.status(200)
+            .json({
+                success: true,
+                book: books[index]
+            });
     } else {
         res.status(404)
-            .json('book not found.');
+            .json({
+                success: false,
+                message: 'book not found.'
+            });
     }
 });
 app.post('/api/book/', (req, res) => {
@@ -62,7 +73,11 @@ app.post('/api/book/', (req, res) => {
         fileName);
     books.push(newBook);
     
-    res.status(201).json(newBook);
+    res.status(201)
+        .json({
+            success: true,
+            message: 'book succesfully added.'
+        });
 });
 app.put('/api/book/:id', (req, res) => {
     const { books } = store;
@@ -87,12 +102,40 @@ app.put('/api/book/:id', (req, res) => {
             fileCover, 
             fileName 
         };
-        res.json(books[index]);
+        res.status(200)
+            .json({
+                success: true,
+                message: 'book succesfully changed.'
+            });
     } else {
         res.status(404)
-            .json('book not found.');
+            .json({
+                success: false,
+                message: 'book not found.'
+            });
     }
-})
+});
+app.delete('/api/book/:id', (req, res) => {
+    const { books } = store;
+    const { id } = req.params;
+    const index = books.findIndex(item => item.id === id);
+    if (index !== -1) {
+        books.splice(index, 1);
+        res.status(200)
+            .json({
+                success: true,
+                index: index,
+                message: `book with id: ${id} succesfully deleted.`
+            });
+    } else {
+        res.status(404)
+            .json({
+                success: false,
+                message: 'book not found.'
+            });
+    }
+});
+
 const listener = () => {
     console.log(`Server is running. Connect: http://localhost:${PORT}/`);
 };
