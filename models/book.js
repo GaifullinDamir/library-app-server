@@ -1,6 +1,6 @@
-const uidGenerator = require('node-unique-id-generator');
+const uidGenerator = require('node-random-id');
 
-class book {
+class Book {
     constructor(
         title = '',
         description = '',
@@ -8,7 +8,7 @@ class book {
         favorite = '',
         fileCover = '',
         fileName = '',
-        id = uidGenerator.generateUniqueId()
+        id = uidGenerator.ranid()
     ) {
         this.title = title;
         this.description = description;
@@ -16,7 +16,8 @@ class book {
         this.favorite = favorite;
         this.fileCover = fileCover;
         this.fileName = fileName;
+        this.id = id;
     }
 }
 
-module.exports = book;
+module.exports = Book;
