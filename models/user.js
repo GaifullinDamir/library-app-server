@@ -8,11 +8,11 @@ class User {
         email = '',
         id = uid.ranid()
     ) {
-        name = name,
-        surname = surname,
-        password = password,
-        email = email,
-        id = id
+        this.name = name,
+        this.surname = surname,
+        this.password = password,
+        this.email = email,
+        this.id = id
     }
 };
 
