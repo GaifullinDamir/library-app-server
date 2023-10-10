@@ -14,7 +14,8 @@ const store = {
         authors = `authors ${item}`,
         favorite = `favorite ${item}`,
         fileCover = `fileCover ${item}`,
-        fileName = `fileName ${item}`
+        fileName = `fileName ${item}`,
+        fileBook = '2023-10-10T07-59-09.202Z-example.txt'
         );
     store.books = [...store.books, newBook];
 });
@@ -56,7 +57,8 @@ bookRouter.post('/', (req, res) => {
         authors, 
         favorite, 
         fileCover, 
-        fileName 
+        fileName, 
+        fileBook
     } = req.body;
     const newBook = new Book(
         title, 
@@ -64,7 +66,8 @@ bookRouter.post('/', (req, res) => {
         authors,
         favorite,
         fileCover,
-        fileName);
+        fileName,
+        fileBook);
     books.push(newBook);
     
     res.status(201)
@@ -86,7 +89,11 @@ bookRouter.post('/upload-book', fileMiddleware.single('book-txt'), (req, res) =>
 });
 
 bookRouter.get('/:id/download-book', (req, res) => {
-    res.download(__dirname + '/../public/book/2023-10-10T07-59-09.202Z-example.txt', 'example.txt', (err) => {
+    const { books } = store;
+    const { id } = req.params;
+    const index = books.findIndex(item => item.id === id);
+
+    res.download(__dirname + `/../public/book/${books[index].fileBook}`, 'example.txt', (err) => {
         if (err) {
             res.status(404).json();
         }
@@ -101,7 +108,8 @@ bookRouter.put('/:id', (req, res) => {
         authors, 
         favorite, 
         fileCover, 
-        fileName 
+        fileName,
+        fileBook
     } = req.body;
     const { id } = req.params;
     const index = books.findIndex(item => item.id === id);
@@ -114,7 +122,8 @@ bookRouter.put('/:id', (req, res) => {
             authors, 
             favorite, 
             fileCover, 
-            fileName 
+            fileName,
+            fileBook
         };
         res.status(200)
             .json({
