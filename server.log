@@ -38,3 +38,14 @@
 11:11:32 POST /api/book/upload-book user agent: PostmanRuntime/7.33.0
 11:11:35 POST /api/book/upload-book user agent: PostmanRuntime/7.33.0
 11:11:36 POST /api/book/upload-book user agent: PostmanRuntime/7.33.0
+11:17:23 GET /api/book user agent: PostmanRuntime/7.33.0
+11:17:42 GET /api/book/appreciable-prick/download-book user agent: PostmanRuntime/7.33.0
+11:18:12 GET /api/book/%22appreciable-prick%22/download-book user agent: PostmanRuntime/7.33.0
+11:18:56 GET /api/book user agent: PostmanRuntime/7.33.0
+11:19:6 GET /api/book/killed-biology/download-book user agent: PostmanRuntime/7.33.0
+11:19:19 GET /api/book user agent: PostmanRuntime/7.33.0
+11:19:31 GET /api/book/left-wing-vehicle/download-book user agent: PostmanRuntime/7.33.0
+11:19:51 GET /api/book user agent: PostmanRuntime/7.33.0
+11:20:2 GET /api/book/unopened-scent/download-book user agent: PostmanRuntime/7.33.0
+11:21:16 GET /api/book user agent: PostmanRuntime/7.33.0
+11:21:24 GET /api/book/step-by-step-conga/download-book user agent: PostmanRuntime/7.33.0

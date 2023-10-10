@@ -86,7 +86,7 @@ bookRouter.post('/upload-book', fileMiddleware.single('book-txt'), (req, res) =>
 });
 
 bookRouter.get('/:id/download-book', (req, res) => {
-    res.download(__dirname + '/../public/book/example.txt', 'example.txt', (err) => {
+    res.download(__dirname + '/../public/book/2023-10-10T07-59-09.202Z-example.txt', 'example.txt', (err) => {
         if (err) {
             res.status(404).json();
         }
