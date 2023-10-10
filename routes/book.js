@@ -1,6 +1,7 @@
 const express = require('express');
 const bookRouter = express.Router();
 const { Book } = require('../models/index');
+const fileMiddleware = require('../middleware/file');
 
 const store = {
     books: []
@@ -72,6 +73,25 @@ bookRouter.post('/', (req, res) => {
             message: 'book succesfully added.'
         });
 });
+
+bookRouter.post('/upload-book', fileMiddleware.single('book-txt'), (req, res) => {
+    if (req.file) {
+        const {path} = req.file;
+        console.log(path);
+
+        res.json(path);
+    } else {
+        res.json(null);
+    }
+});
+
+bookRouter.get('/:id/download-book', (req, res) => {
+    res.download(__dirname + '/../public/book/example.txt', 'example.txt', (err) => {
+        if (err) {
+            res.status(404).json();
+        }
+    })
+})
 
 bookRouter.put('/:id', (req, res) => {
     const { books } = store;
